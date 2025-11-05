@@ -35,7 +35,7 @@ interface Directors extends Teacher {
 }
 
 // Create director example
-const director1: Directors = {
+const director1: Teacher = {
   firstName: 'John',
   lastName: 'Doe',
   location: 'London',
