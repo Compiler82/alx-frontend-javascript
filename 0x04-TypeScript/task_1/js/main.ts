@@ -88,6 +88,8 @@ function printTeacher(firstName: string, lastName: string): string {
   return `${firstName[0]}. ${lastName}`;
 }
 
+printTeacher({firstName: "john", lastName "Doe"})
+
 // Test the printTeacher function
 console.log(printTeacher("John", "Doe")); 
 console.log(printTeacher("Jane", "Smith")); 
