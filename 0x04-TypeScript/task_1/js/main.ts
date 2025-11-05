@@ -1,3 +1,29 @@
+// Define the Student interface
+interface Student {
+  firstName: string;
+  lastName: string;
+  age: number;
+  location: string;
+}
+
+// Create two students
+const student1: Student = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 20,
+  location: "New York"
+};
+
+const student2: Student = {
+  firstName: "Jane",
+  lastName: "Smith",
+  age: 22,
+  location: "Los Angeles"
+};
+
+// Create an array containing the two students
+const studentsList: Array<Student> = [student1, student2];
+
 // Define the Teacher interface
 interface Teacher {
   readonly firstName: string;
@@ -52,15 +78,16 @@ const director1: Directors = {
 
 console.log(director1);
 
+// Define the printTeacherFunction interface
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
 // Implement the printTeacher function
-const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-};
+function printTeacher(firstName: string, lastName: string): string {
+  return `${firstName[0]}. ${lastName}`;
+}
 
 // Test the printTeacher function
-console.log(printTeacher("John", "Doe")); 
-console.log(printTeacher("Jane", "Smith"));
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
+console.log(printTeacher("Jane", "Smith")); 
