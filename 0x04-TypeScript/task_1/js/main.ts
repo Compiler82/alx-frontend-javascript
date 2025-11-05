@@ -51,3 +51,15 @@ const director1: Directors = {
 };
 
 console.log(director1);
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// Implement the printTeacher function
+const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
+  return `${firstName.charAt(0)}. ${lastName}`;
+};
+
+// Test the printTeacher function
+console.log(printTeacher("John", "Doe")); 
+console.log(printTeacher("Jane", "Smith"));
