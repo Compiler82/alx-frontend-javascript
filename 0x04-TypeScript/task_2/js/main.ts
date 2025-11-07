@@ -1,10 +1,12 @@
+
+// DirectorInterface
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workDirectorTasks(): string;
 }
 
-// TeacherInterface with 3 expected methods
+// TeacherInterface
 interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
@@ -26,7 +28,7 @@ class Director implements DirectorInterface {
   }
 }
 
-// Teacher class implementing TeacherInterface
+
 class Teacher implements TeacherInterface {
   workFromHome(): string {
     return "Cannot work from home";
@@ -41,24 +43,21 @@ class Teacher implements TeacherInterface {
   }
 }
 
-// createEmployee function
+// Function to create an employee
 function createEmployee(salary: number | string): Director | Teacher {
-  if (salary < 500) {
+  if (typeof salary === "number" && salary < 500) {
     return new Teacher();
+  } else {
+    return new Director();
   }
-  return new Director();
 }
 
-// Test the createEmployee function
-console.log(createEmployee(200));
-console.log(createEmployee(1000));
-console.log(createEmployee('$500'));
-
+// Type predicate to check if employee is a Director
 function isDirector(employee: Director | Teacher): employee is Director {
-  return (employee as Director).workDirectorTasks !== undefined;
+  return employee instanceof Director;
 }
 
-// executeWork function
+// Function executeWork
 function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
@@ -67,6 +66,10 @@ function executeWork(employee: Director | Teacher): string {
   }
 }
 
-// Test the executeWork function
-console.log(executeWork(createEmployee(200)));
-console.log(executeWork(createEmployee(1000)));
+
+console.log(createEmployee(200));  
+console.log(createEmployee(1000)); 
+console.log(createEmployee('$500')); 
+
+console.log(executeWork(createEmployee(200)));  
+console.log(executeWork(createEmployee(1000))); 
