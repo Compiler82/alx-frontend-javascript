@@ -1,74 +1,24 @@
-// 1. DirectorInterface
-interface DirectorInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workDirectorTasks(): string;
+type Subjects = 'Math' | 'History';
+
+/**
+ * A function that describes what is being taught based on the class subject.
+ * @param todayClass - The subject being taught, restricted to 'Math' or 'History'.
+ * @returns A string indicating the teaching action.
+ */
+function teachClass(todayClass: Subjects): string {
+    // We use a switch statement to handle the specific String literal values.
+    // Because todayClass is of type Subjects, the compiler knows the only two
+    // possible cases are 'Math' and 'History'.
+    switch (todayClass) {
+        case 'Math':
+            return 'Teaching Math';
+        case 'History':
+            return 'Teaching History';
+        // Note: No default case is strictly necessary here because Subjects is a
+        // closed union type, ensuring only 'Math' or 'History' are possible.
+    }
 }
 
-// 2. TeacherInterface
-interface TeacherInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workTeacherTasks(): string;
-}
-
-// 3. Director class
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return "Working from home";
-  }
-
-  getCoffeeBreak(): string {
-    return "Getting a coffee break";
-  }
-
-  workDirectorTasks(): string {
-    return "Getting to director tasks";
-  }
-}
-
-// 4. Teacher class
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return "Cannot work from home";
-  }
-
-  getCoffeeBreak(): string {
-    return "Cannot have a break";
-  }
-
-  workTeacherTasks(): string {
-    return "Getting to work";
-  }
-}
-
-// 5. createEmployee function
-function createEmployee(salary: number | string): Director | Teacher {
-  if (typeof salary === "number" && salary < 500) {
-    return new Teacher();
-  } else {
-    return new Director();
-  }
-}
-
-// 6. isDirector type predicate
-function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
-}
-
-// 7. executeWork function
-function executeWork(employee: Director | Teacher): string {
-  if (isDirector(employee)) {
-    return employee.workDirectorTasks();
-  } else {
-    return employee.workTeacherTasks();
-  }
-}
-
-// 8. Test cases
-console.log(createEmployee(200));    // → Teacher {}
-console.log(createEmployee(1000));   // → Director {}
-console.log(createEmployee('$500')); // → Director {}
-
-console.log(executeWork(createEmployee(200)));   // → Getting to work
-console.log(executeWork(createEmployee(1000)));  // → Getting to director tasks
+// --- Example Usage and Verification ---
+console.log(`teachClass('Math'): ${teachClass('Math')}`);
+console.log(`teachClass('History'): ${teachClass('History')}`);
